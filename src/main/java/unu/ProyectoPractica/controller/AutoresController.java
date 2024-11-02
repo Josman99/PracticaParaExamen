@@ -28,7 +28,8 @@ public class AutoresController extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    public void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException{
+    public void processRequest(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServerException, IOException{
     	try {
     		if(request.getParameter("op") == null) {
         		listar(request, response);
@@ -72,10 +73,8 @@ public class AutoresController extends HttpServlet {
     	request.getRequestDispatcher("/autor/listaAutores.jsp").forward(request, response);
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
-    	
-    }
-    
+		}   	
+    }   
     public void ingresar(HttpServletRequest request, HttpServletResponse response) throws SQLException{
     	Autor miautor = new Autor();
     	try {
@@ -88,14 +87,12 @@ public class AutoresController extends HttpServlet {
 			} else {
 				request.getSession().setAttribute("Fracaso", "Autor no registrado ya que hay otro autor con ese codigo ");
 				response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
-			}
-			
+			}		
 			response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
 		} catch (Exception e) {
 			System.out.println("error al ingrese desde el contyrolador: "+e.getMessage());
 		}
     }
-    
     public void obtener(HttpServletRequest request, HttpServletResponse response) throws SQLException{
     	try {
     		String id = request.getParameter("id");
@@ -105,8 +102,7 @@ public class AutoresController extends HttpServlet {
 				request.getRequestDispatcher("/autor/modificarAutor.jsp").forward(request, response);
 			}else {
 				response.sendRedirect(request.getContextPath()+"/error404.jsp");
-			}
-			
+			}		
 			response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
 		} catch (Exception e) {
 			System.out.println("error al obtener desde el controlador: "+e.getMessage());
@@ -118,14 +114,13 @@ public class AutoresController extends HttpServlet {
 			miautor.setIdAutor(Integer.parseInt(request.getParameter("id")));
 			miautor.setNombreAutor(request.getParameter("nombre"));
 			miautor.setNacionalidad(request.getParameter("nacionalidad"));
-			if(modelo.insertarAutor(miautor)>0) {
-				request.getSession().setAttribute("exito", "Autor registrado exitosamente");
+			if(modelo.modificarAutor(miautor)>0) {
+				request.getSession().setAttribute("exito", "Autor modificado exitosamente");
 				response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
 			} else {
 				request.getSession().setAttribute("Fracaso", "Autor no registrado ya que hay otro autor con ese codigo ");
 				response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
-			}
-			
+			}	
 			response.sendRedirect(request.getContextPath()+"/AutoresController?op=listar");
 		} catch (Exception e) {
 			System.out.println("error al ingrese desde el contyrolador: "+e.getMessage());
@@ -145,9 +140,6 @@ public class AutoresController extends HttpServlet {
 			System.out.println("error al obtener desde el controlador: "+e.getMessage());
 		}
     }
-    
-    
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -155,7 +147,6 @@ public class AutoresController extends HttpServlet {
 		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -163,5 +154,4 @@ public class AutoresController extends HttpServlet {
 		// TODO Auto-generated method stub
 		processRequest(request, response);
 	}
-
 }

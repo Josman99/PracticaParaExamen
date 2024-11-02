@@ -1,5 +1,4 @@
 package unu.ProyectoPractica.models;
-
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,12 +9,9 @@ import java.util.logging.Logger;
 import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import unu.ProyectoPractica.beans.Autor;
 import unu.ProyectoPractica.controller.AutoresController;
-
-public class AutorModel extends Conexion{
-	
+public class AutorModel extends Conexion{	
 	CallableStatement cs;
-	ResultSet rs;
-	
+	ResultSet rs;	
 	public List<Autor> listaAutores() throws SQLException{
 		try {
 			List<Autor> lista = new ArrayList<>();
@@ -38,8 +34,7 @@ public class AutorModel extends Conexion{
 			this.cerrarConexion();
 			return null;
 		}
-	}
-	
+	}	
 	public int insertarAutor(Autor autor) throws SQLException{
 		try {
 			int filasAfectadas=0; 
@@ -75,10 +70,8 @@ public class AutorModel extends Conexion{
 			this.cerrarConexion();
 			return null;
 		}
-		return miautor;
-		
-	}
-	
+		return miautor;		
+	}	
 	public int modificarAutor(Autor autor) throws SQLException{
 		try {
 			int filasAfectadas=0; 
@@ -95,7 +88,6 @@ public class AutorModel extends Conexion{
 			return 0;
 		}
 	}
-	
 	public int eliminarAutor(int idAutor) throws SQLException{
 		try {
 			int filasAfectadas=0;
@@ -109,13 +101,6 @@ public class AutorModel extends Conexion{
 		} catch (Exception e) {
 			System.out.println("error al obtener desde el modelo: "+e.getMessage());
 			return 0;
-		}
-		
-	}
-	
-	
-	
-	
-	
-	
+		}	
+	}	
 }
